@@ -1,21 +1,29 @@
-
+import React from "react";
+import { Route, Routes } from 'react-router-dom'
 import Header from './components/Header'
 import Footer from './components/Footer'
 import Home from './components/Home'
-// import reactLogo from './assets/react.svg'
-// import viteLogo from './assets/vite.svg'
-// import heroImg from './assets/hero.png'
+import AboutUs from './components/AboutUs'
 
 
 function App() {
-  const [count, setCount] = useState(0)
+  //const [count, setCount] = useState(0)
 
   return (
-    <>
+    
+    <div className="App">
+
       <Header />
-      <Home />
-      <Footer />
-    </>
+
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/about" element={<AboutUs />} />
+        </Routes>
+        <br></br>
+        <Footer />
+
+    </div>
+
   )
 }
 
