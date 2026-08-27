@@ -19,7 +19,7 @@ function Chat() {
 
         const userMessage = input.trim();
         setInput('');
-        // ၁။ User Message ကို ချက်ချင်းထည့်လိုက်မယ် (ဒါကြောင့် မျက်နှာပြင်ပေါ် ပေါ်မယ်)
+        // ၁။ User message ကို ပထမဆုံး ထည့်မယ် (ဒါက အရေးကြီးဆုံး)
         setMessages(prev => [...prev, { sender: 'user', text: userMessage }]);
         setLoading(true);
 
@@ -30,22 +30,11 @@ function Chat() {
                 body: JSON.stringify({ message: userMessage })
             });
 
-            if (!res.ok) {
-                throw new Error(`HTTP error! status: ${res.status}`);
-            }
-
             const data = await res.json();
-            // ၂။ Bot Reply ကိုထည့်မယ် (data.reply ရှိရင် သုံးမယ်၊ မရှိရင် Fallback)
-            setMessages(prev => [...prev, { 
-                sender: 'bot', 
-                text: data.reply || 'ပြန်ဖြေလို့မရသေးဘူး။ နောက်မှပြန်ကြည့်မယ်။' 
-            }]);
+            // ၂။ Bot reply ကို ထည့်မယ်
+            setMessages(prev => [...prev, { sender: 'bot', text: data.reply || 'ပြန်ဖြေလို့မရသေးဘူး။' }]);
         } catch (error) {
-            console.error('Fetch Error:', error);
-            setMessages(prev => [...prev, { 
-                sender: 'bot', 
-                text: 'အင်း... Network error ဖြစ်နေတယ်။ နောက်မှပြန်ကြည့်မယ်။' 
-            }]);
+            setMessages(prev => [...prev, { sender: 'bot', text: 'အင်း... Network error ဖြစ်နေတယ်။ နောက်မှပြန်ကြည့်မယ်။' }]);
         } finally {
             setLoading(false);
         }
