@@ -10,7 +10,6 @@ function Chat() {
     const [loading, setLoading] = useState(false);
     const messagesEndRef = useRef(null);
 
-    // စာသားအသစ်ထည့်တိုင်း အောက်ကိုအလိုအလျောက် ဆင်းပေးမယ်
     useEffect(() => {
         messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
     }, [messages]);
@@ -20,6 +19,7 @@ function Chat() {
 
         const userMessage = input.trim();
         setInput('');
+        // ၁။ User Message ကို ချက်ချင်းထည့်လိုက်မယ် (ဒါကြောင့် မျက်နှာပြင်ပေါ် ပေါ်မယ်)
         setMessages(prev => [...prev, { sender: 'user', text: userMessage }]);
         setLoading(true);
 
@@ -30,16 +30,27 @@ function Chat() {
                 body: JSON.stringify({ message: userMessage })
             });
 
+            if (!res.ok) {
+                throw new Error(`HTTP error! status: ${res.status}`);
+            }
+
             const data = await res.json();
-            setMessages(prev => [...prev, { sender: 'bot', text: data.reply || 'ပြန်ဖြေလို့မရသေးဘူး။' }]);
+            // ၂။ Bot Reply ကိုထည့်မယ် (data.reply ရှိရင် သုံးမယ်၊ မရှိရင် Fallback)
+            setMessages(prev => [...prev, { 
+                sender: 'bot', 
+                text: data.reply || 'ပြန်ဖြေလို့မရသေးဘူး။ နောက်မှပြန်ကြည့်မယ်။' 
+            }]);
         } catch (error) {
-            setMessages(prev => [...prev, { sender: 'bot', text: 'အင်း... Network error ဖြစ်နေတယ်။ နောက်မှပြန်ကြည့်မယ်။' }]);
+            console.error('Fetch Error:', error);
+            setMessages(prev => [...prev, { 
+                sender: 'bot', 
+                text: 'အင်း... Network error ဖြစ်နေတယ်။ နောက်မှပြန်ကြည့်မယ်။' 
+            }]);
         } finally {
             setLoading(false);
         }
     };
 
-    // Enter နှိပ်ရင် ပို့မယ်
     const handleKeyPress = (e) => {
         if (e.key === 'Enter' && !e.shiftKey) {
             e.preventDefault();
@@ -56,7 +67,6 @@ function Chat() {
                 </button>
             </div>
 
-            {/* Messages Container */}
             <div style={{ flex: 1, overflowY: 'auto', paddingRight: '5px', marginBottom: '15px' }}>
                 {messages.map((msg, idx) => (
                     <div key={idx} style={{ 
@@ -72,7 +82,8 @@ function Chat() {
                             color: msg.sender === 'user' ? 'white' : '#333',
                             borderTopRightRadius: msg.sender === 'user' ? '4px' : '18px',
                             borderTopLeftRadius: msg.sender === 'user' ? '18px' : '4px',
-                            boxShadow: '0 2px 8px rgba(0,0,0,0.05)'
+                            boxShadow: '0 2px 8px rgba(0,0,0,0.05)',
+                            wordBreak: 'break-word'
                         }}>
                             {msg.text}
                         </div>
@@ -96,7 +107,6 @@ function Chat() {
                 <div ref={messagesEndRef} />
             </div>
 
-            {/* Input Area */}
             <div style={{ display: 'flex', gap: '10px', borderTop: '1px solid #f0e6e6', paddingTop: '15px' }}>
                 <input
                     type="text"

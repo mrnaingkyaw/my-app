@@ -43,9 +43,9 @@ export default async function handler(req, res) {
         return res.status(200).json({ reply: text });
     } catch (error) {
         console.error('Gemini API Error:', error);
-        // Error ဖြစ်ရင်လည်း သုံးစွဲသူကို ဖော်ရွေစွာ ပြန်ဖြေမယ်
-        return res.status(200).json({ 
-            reply: "အင်း... ကျွန်တော် နည်းနည်းရှုပ်သွားတယ်။ နောက်တစ်ခါ ပြန်မေးကြည့်ပေးဦး။ 💖" 
-        });
+        // Error ဖြစ်ရင်လည်း Mock Reply ကို ပြန်သုံးမယ် (ဒါမှ သုံးစွဲသူကို ဖော်ရွေစွာ ပြန်ဖြေနိုင်မယ်)
+        const reply = mockReplies[mockIndex % mockReplies.length];
+        mockIndex++;
+        return res.status(200).json({ reply });
     }
 }
