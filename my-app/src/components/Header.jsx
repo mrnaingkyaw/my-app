@@ -10,9 +10,10 @@ function Header() {
                 <button className="nav-btn" onClick={() => navigate('/')}>Home</button>
                 <button className="nav-btn" onClick={() => navigate('/about')}>About</button>
                 <button className="nav-btn" onClick={() => navigate('/contact')}>Contact</button>
+                <button className="nav-btn" onClick={() => navigate('/chat')} style={{ background: '#d81b60', color: 'white' }}>🤖 Chat</button>
             </div>
         </header>
     );
 }
 
-export default Header; // ✅ ထည့်ပေးထားတယ်
+export default Header;

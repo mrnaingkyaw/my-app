@@ -5,6 +5,7 @@ import Footer from './components/Footer';
 import Home from './components/Home';
 import AboutUs from './components/AboutUs';
 import ContactUs from './components/ContactUs';
+import Chat from './components/Chat'; // 🆕 ဒီဟာ ထည့်ပါ
 import './App.css';
 
 function App() {
@@ -16,6 +17,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<AboutUs />} />
           <Route path="/contact" element={<ContactUs />} />
+          <Route path="/chat" element={<Chat />} /> {/* 🆕 ဒီဟာ ထည့်ပါ */}
         </Routes>
       </div>
       <Footer />
