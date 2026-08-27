@@ -21,7 +21,7 @@ function AboutUs() {
                 <li>Handle deployment, logging, and monitoring through LLMOps practices.</li>
             </ul>
 
-            {/* မင်း တောင်းဆိုထားတဲ့ AI Service Status Section - ဒီနေရာမှာ ထည့်ပေးထားတယ် */}
+            {/* ဒီနေရာမှာ မင်းတောင်းဆိုထားတဲ့ AI Service Status Box */}
             <div style={{ background: '#e8f5e9', padding: '15px', borderRadius: '15px', marginTop: '20px' }}>
                 <h4>🤖 AI Service Status (Live Demo)</h4>
                 <p>✅ Gemini API: <span style={{ color: '#2e7d32' }}>Operational</span></p>
@@ -38,5 +38,4 @@ function AboutUs() {
     );
 }
 
-// ⚠️ ဒီ Export ကို မမေ့ပါနဲ့။ Vercel Build အတွက် အရေးကြီးတယ်။
-export default AboutUs;
+export default AboutUs; // ✅ ထည့်ပေးထားတယ်

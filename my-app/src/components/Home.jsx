@@ -39,4 +39,5 @@ function Home() {
         </main>
     );
 }
-export default Home;
+
+export default Home; // ✅ ထည့်ပေးထားတယ်
