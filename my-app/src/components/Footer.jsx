@@ -3,10 +3,9 @@ import React from 'react';
 function Footer() {
     return (
         <footer className="footer">
-            <h2>My footer is here</h2>
-            <p>&copy; 2026 My App. All rights reserved.</p>
+            <p style={{ margin: 0 }}>Made with ❤️ | &copy; 2026 My App</p>
         </footer>
     );
 }
 
-export default Footer;  
+export default Footer;
